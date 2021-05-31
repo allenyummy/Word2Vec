@@ -10,3 +10,6 @@ WIKI_OUTPUT_PATH="/Users/allenyummy/Documents/Word2Vec/data/processed/wiki_corpu
 python wiki2txt.py \
     -i $WIKI_INPUT_PATH \
     -o $WIKI_OUTPUT_PATH \
+
+python train.py \
+    -i $WIKI_OUTPUT_PATH \
