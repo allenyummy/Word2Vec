@@ -1,0 +1,5 @@
+opencc == 1.1.2
+gensim == 4.0.1
+torch == 1.7.1
+transformers == 4.6.1
+ckip-transformers == 0.2.4
