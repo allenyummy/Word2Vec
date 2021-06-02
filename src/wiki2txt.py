@@ -50,7 +50,7 @@ def parse_args():
 
 def main():
 
-    """ Args """
+    """Args"""
     logger.info(" === PARSE ARGS === ")
     args = parse_args()
     logger.info(args)

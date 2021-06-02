@@ -12,7 +12,7 @@ GPU_INDEX=-1  ## -1 means cpu
 SAVE_STEPS=5000
 DEBUG=True
 
-python wiki2txt.py \
+python src/wiki2txt.py \
     --input $WIKI_INPUT_PATH \
     --output $WIKI_OUTPUT_PATH \
     --gpu_index $GPU_INDEX \
@@ -30,7 +30,7 @@ EPOCHS=5
 SEED=1
 TRAINED_MODEL_PATH=model/word2vec_${TODAY}_v${VECTOR_SIZE}_c${MIN_COUNT}_e${EPOCHS}_s${SEED}.model
 
-python train.py \
+python src/train.py \
     --input $WIKI_OUTPUT_PATH \
     --output $TRAINED_MODEL_PATH \
     --vector_size $VECTOR_SIZE \
