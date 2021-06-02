@@ -6,10 +6,10 @@
 
 <a name="toc"/></a>
 ## Table of Contents
-* Installation(#installation)
-* Prepare Corpus(#prepare_corpus)
-* Train your own Word2Vec model(#train)
-* Example(#example)
+* [Installation](#installation)
+* [Prepare Corpus](#prepare_corpus)
+* [Train your own Word2Vec model](#train)
+* [Example](#example)
 
 
 <a name="installation"/></a>
