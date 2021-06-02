@@ -33,19 +33,19 @@ def parse_args():
         "--min_count",
         type=int,
         default=5,
-        help="Ignores all words with total frequency lower than this."
+        help="Ignores all words with total frequency lower than this.",
     )
     parser.add_argument(
         "--epochs",
         type=int,
         default=5,
-        help="Number of iterations (epochs) over the corpus."
+        help="Number of iterations (epochs) over the corpus.",
     )
     parser.add_argument(
         "--seed",
         type=int,
         default=1,
-        help="Initial vectors for each word are seeded with a hash of the concatenation of word + str(seed)."
+        help="Initial vectors for each word are seeded with a hash of the concatenation of word + str(seed).",
     )
 
     args = parser.parse_args()
@@ -65,7 +65,13 @@ def main():
     sentences = word2vec.LineSentence(args.input)
 
     """ Train """
-    model = word2vec.Word2Vec(sentences, vector_size=args.vector_size, min_count=args.min_count, seed=args.seed, epochs=args.epochs)
+    model = word2vec.Word2Vec(
+        sentences,
+        vector_size=args.vector_size,
+        min_count=args.min_count,
+        seed=args.seed,
+        epochs=args.epochs,
+    )
 
     """ Save """
     model.save(args.output)
