@@ -1,16 +1,18 @@
 #!/bin/bash
 
 ## Find Zh-Wiki Here: https://dumps.wikimedia.org/zhwiki/
-## curl -O https://dumps.wikimedia.org/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2 
+curl -O https://dumps.wikimedia.org/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2 && \
+mkdir data && \
+mv zhwiki-latest-pages-articles.xml.bz2 data
 
 ## Get Wiki Corpus And Transform ZhTW
 echo ===== Proprocess Corpus =====
 
 WIKI_INPUT_PATH=data/zhwiki-latest-pages-articles.xml.bz2
-WIKI_OUTPUT_PATH=data/processed/wiki_corpus_5.txt
+WIKI_OUTPUT_PATH=data/processed/wiki_corpus.txt
 GPU_INDEX=-1  ## -1 means cpu
 SAVE_STEPS=5000
-DEBUG=True
+DEBUG=False
 
 python src/wiki2txt.py \
     --input $WIKI_INPUT_PATH \
