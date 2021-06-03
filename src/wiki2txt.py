@@ -7,6 +7,7 @@ import os
 from tqdm import tqdm
 import argparse
 import opencc
+import torch
 from gensim.corpora import WikiCorpus
 from ckip_transformers.nlp import CkipWordSegmenter
 
@@ -27,12 +28,6 @@ def parse_args():
         help="output txt file path",
     )
     parser.add_argument(
-        "--gpu_index",
-        type=int,
-        default=-1,
-        help="Setting this to -1 will leverage CPU, a positive will run the model on the associated CUDA device id.",
-    )
-    parser.add_argument(
         "--save_steps",
         type=int,
         default=5000,
@@ -40,9 +35,8 @@ def parse_args():
     )
     parser.add_argument(
         "--debug",
-        type=bool,
-        default=False,
-        help="debug mode",
+        action="store_true",   ## default = False
+        help="debug mode and it will preprocess 5 articles only.",
     )
     args = parser.parse_args()
     return args
@@ -54,12 +48,17 @@ def main():
     logger.info(" === PARSE ARGS === ")
     args = parse_args()
     logger.info(args)
+    print(args)
 
     """ Language Converter """
     converter = opencc.OpenCC("s2twp.json")
 
     """ Tokenizer """
-    tokenizer = CkipWordSegmenter(level=3, device=args.gpu_index)
+    ## get gpu index first
+    gpu_index = -1 ## default: cpu
+    if torch.cuda.is_available():
+        gpu_index = torch.cuda.current_device()
+    tokenizer = CkipWordSegmenter(level=3, device=gpu_index)
 
     """ Create Output Directory """
     if not os.path.exists(os.path.dirname(args.output)):
