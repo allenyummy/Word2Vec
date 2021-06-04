@@ -2,6 +2,19 @@
 
 該 repo 展示如何訓練自己的 Word2Vec 模型，雖然 Word2Vec 是 2013 年的產物，無法處理一詞多義的狀況，但是仍是一個值得學習的經典模型。
 
+同時，亦開放兩項資源:
+
+1. 已完成前處理的[維基資料](https://drive.google.com/file/d/1vgg3q8P0-6j3FB9mXRYFr_uk4aHJ9dwm/view?usp=sharing)
+* 資料來源 ([zhwiki-latest-pages-articles.xml.bz2](https://dumps.wikimedia.org/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2))
+* 簡體轉繁體 (使用工具:opencc s2twp.json)
+* 繁體斷詞 (使用工具: ckiplab/bert-base-chinese-ws)
+
+2. 已訓練完備的[Word2Vec Model](https://sdrive.google.com/drive/folders/1qRI8BNPpGXUae2Tso7DrwDkR5PXUkZRG?usp=sharing)
+* vector size: 250  ## 每個詞彙的向量長度
+* min count: 5      ## 在上述文本中，詞彙最少須出現過5次，才會被納入辭典
+* epochs: 5         ## 訓練迭代次數
+* seed: 1           ## 亂數生成種子，確保實驗可重複性
+
 ---
 
 <a name="toc"/></a>
