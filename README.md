@@ -9,7 +9,7 @@
 * 簡體轉繁體 (使用工具:opencc s2twp.json)
 * 繁體斷詞 (使用工具: ckiplab/bert-base-chinese-ws)
 
-2. 已訓練完備的[Word2Vec Model](https://sdrive.google.com/drive/folders/1qRI8BNPpGXUae2Tso7DrwDkR5PXUkZRG?usp=sharing)
+2. 已訓練完備的[Word2Vec Model](https://drive.google.com/drive/folders/1qRI8BNPpGXUae2Tso7DrwDkR5PXUkZRG?usp=sharing)
 * vector size: 250  ## 每個詞彙的向量長度
 * min count: 5      ## 在上述文本中，詞彙最少須出現過5次，才會被納入辭典
 * epochs: 5         ## 訓練迭代次數
