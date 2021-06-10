@@ -1,31 +1,56 @@
-from gensim.test.utils import datapath
-from gensim import utils
+# encoding=utf-8
+# Author: Yu-Lun Chiang
+# Description: Inference
+
+import logging
+from typing import List, Tuple
 from gensim.models import word2vec
+from gensim.models import KeyedVectors
+
+logger = logging.getLogger(__name__)
 
 
-class MyCorpus:
-    """An iterator that yields sentences (lists of str)."""
+def load_model(use_fast: bool):
+    if use_fast:
+        wv = KeyedVectors.load(
+            "model/word2vec_20210603040434_v250_c5_e5_s1.wordvectors", mmap="r"
+        )
+    else:
+        model = word2vec.Word2Vec.load(
+            "model/word2vec_20210603040434_v250_c5_e5_s1.model"
+        )
+        wv = model.wv
+    return wv
 
-    def __iter__(self):
-        corpus_path = datapath("lee_background.cor")
-        for line in open(corpus_path):
-            # assume there's one document per line, tokens separated by whitespace
-            yield utils.simple_preprocess(line)
+
+def infer(wv, word: str, topn: int = 10) -> List[Tuple[str, float]]:
+    if word not in wv:
+        logger.info("{word} not in dictionary.")
+        return None
+    else:
+        return wv.most_similar(word, topn=topn)
 
 
 if __name__ == "__main__":
-    # sentences = MyCorpus()
-    # for i, sentence in enumerate(sentences):
-    #     if i > 1:
-    #         break
-    #     print(sentence)
 
-    model = word2vec.Word2Vec.load("word2vec.model")
-    for index, word in enumerate(model.wv.index_to_key):
-        if index == 20:
-            break
-        print(f"word #{index}/{len(model.wv.index_to_key)} is {word}")
+    wv = load_model(use_fast=True)
 
-    vec_history = model.wv["歷史"]
-    print(len(vec_history))
-    print(model.wv.most_similar("文學", topn=5))
+    ret = dict()
+
+    with open(
+        "/Users/allenyummy/Documents/news_classifier/src/utils/keywords/negative_news/NN_keywords.txt",
+        "r",
+        encoding="utf-8-sig",
+    ) as f:
+
+        for word in f:
+            word = word.strip()
+
+            ret[word] = list()
+            if word in wv:
+                res = infer(wv, word, topn=10)
+                ret[word] = res
+
+    import json
+    with open("nn.json", "w", encoding="utf-8") as fo:
+        json.dump(ret, fo, ensure_ascii=False, indent=4)
