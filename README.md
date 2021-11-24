@@ -9,6 +9,8 @@
 * 簡體轉繁體 (使用工具:opencc s2twp.json)
 * 繁體斷詞 (使用工具: ckiplab/bert-base-chinese-ws)
 
+(若要自己處理維基資料的話，可以參考 https://github.com/attardi/wikiextractor)
+
 2. 已訓練完備的[Word2Vec Model](https://drive.google.com/drive/folders/1P9pzNY3OXE_HkZKHoJWOpFnPTKa1KIWo?usp=sharing)
 * vector size: 250  ## 每個詞彙的向量長度
 * min count: 5      ## 在上述文本中，詞彙最少須出現過5次，才會被納入辭典
